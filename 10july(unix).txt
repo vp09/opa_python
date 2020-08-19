@@ -1,0 +1,7 @@
+#!/bin/bash
+awk 'BEGIN {FS=","} {{print $1 "|" $2 "|" $3 "|" $4 "|" $5 "|" $4-$5}}'|sort -nk6 -t "|"
+
+
+
+awk -F ',' '$3=="Python" && $4=="Oracle" {print $1"&"$2"&"$3"&"$4}' $1 > temp.txt
+awk '{ print $0 }' temp.txt|sort -t"|" -rk2

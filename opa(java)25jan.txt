@@ -1,0 +1,17 @@
+'''
+
+                            Online Python Compiler.
+                Code, Compile, Run and Debug python program online.
+Write your code in this editor and press "Run" button to execute it.
+
+'''
+import string
+def change_word(st):
+    s=" "
+    for word in st:
+        s=s+(word[len(word)-1])
+    print(s.swapcase())
+        
+if __name__=="__main__":
+    st=list(map(str,input().split(' ')))
+    change_word(st)

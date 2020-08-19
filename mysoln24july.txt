@@ -1,0 +1,60 @@
+# Enter your code here.
+class FoodItem:
+    def __init__(self,itm_id,item_name,item_cat,item_price):
+        self.itm_id=itm_id
+        self.item_name=item_name
+        self.item_cat=item_cat
+        self.item_price=item_price
+
+    def provideDiscount(self,per):
+        dis_price=0
+        discount=0
+        discount=self.item_price*(per/100)
+        dis_price=self.item_price-discount
+        return(dis_price)
+    
+class Restaurant:
+    def __init__(self,res_name,foodList):
+        self.res_name=res_name
+        self.fl=foodList
+
+    def retrieveUpdatedPrice(self,item_id,per):
+        if(per<0):
+            return (item_id,per)
+        else:
+            for i in self.fl:
+                if (i.itm_id == item_id) :
+                    i.item_price= i.provideDiscount(per)
+                    return (i.item_name,i.item_price)
+            return None
+
+if __name__=="__main__":
+    count=int(input())
+    foodList=[]
+    
+
+
+    for i in range(count):
+        itm_id=int(input())
+        item_name=input()
+        item_cat=input()
+        item_price=int(input())
+        ob1=FoodItem(itm_id,item_name,item_cat,item_price)
+        foodList.append(ob1)
+    
+    
+    
+    #updated_list=[]
+    
+    item_id=int(input())   
+    #res_name=input()
+    per=int(input())    
+    ob2=Restaurant("ABC",foodList)
+
+    name,price=ob2.retrieveUpdatedPrice(item_id,per)
+
+    
+    print(str(name) +" - " + str(price))
+
+
+

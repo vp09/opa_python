@@ -1,0 +1,15 @@
+def pall(l):
+    rev=[]
+    for i in l:
+        if(i==i[::-1]):
+            rev.append(i)
+                
+    return(rev)
+    
+if __name__=="__main__":
+    c=int(input())
+    l=[]
+    for i in range(c):
+        l.append(input())
+    res=pall(l)
+    print(res)

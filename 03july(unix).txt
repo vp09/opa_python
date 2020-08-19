@@ -1,0 +1,29 @@
+OPA JULY 03 (UNIX)
+Fetch Store records ,Profit wise
+Store details are stored in following format:
+Storeld,Name,Type,StoreRevenue, StoreExpenses
+Write the unix command(s) to display all the fields mentioned above along with the Store Profit field (As a last field of the every store record ) for all the Stores, which are in Profit. The output records of multiple stores are to be displayed in the descending order of StoreProfit.
+Output format: Storeld,Name,Type,StoreRevenue, StoreExpenses and StoreProfit (Caluculated as part of the script/command) are to be displayed with a “I” as the delimiter in the output . For more details on format and order of output refer the sample testcase in the below sections
+
+Formula for caluculation of Store profit : StoreProfit = StoreRevenue – StoreExpenses
+If StoreProfit is greater than Zero, then the store is in Profit.
+The Store details are provided as command line argument when the file containing your command will run. Use appropriate command line argument($1,S2 etc.) to access the details in your file, where you have written the commands.
+For more details, please refer to the sample input and output below.
+
+Input data (From Test case input or from Custom input field ) will be supplied to the shell script through commandline argument. You just need to use the appropriate commandline argument in the shell script to read the content/input data and store the same into a file .Finally Process the file towards the given requirement. To test your code with custom input option the respective checkbox needs to be enabled to enter the input data mentioned in the Qn text.
+Instructions to read data from custom input text field: 1.The first input line contains the StoreId,Name,Type,StoreRevenue, StoreExpenses for the first store and fields/columns of the student separated by comma. 2. The subsequent lines contains the details of the rest of the stores provided one by one as mentioned in Point#1.
+Refer the sample test case below for more details:
+
+
+Test case Input
+1,RamsDeptStore,Stationary,100,50 2,RajStore,Departmental,85,81 3,HealthyStore,Grocery,95,97 4,MiniStore,Medical,60,55
+4 Test case output:
+11RamsDeptStore1Stationary11001501 41MiniStorelMedical16015515 21RajStorelDepartmental18518114
+
+There are three stores(except the store : HealthyStore) , which are in profit( whose Revenue is more than the Expenses) and the these three store records are displayed in the descending order of the Storeprofit(Top profit store record on top and least profit store record at the bottom)
+
+Click here to Execute
+
+
+#!/bin/bash
+sort -k5 -n -t "," | awk 'BEGIN {FS=","} { if(($4-$5>0)) {print $1"|"$2"|"$3"|"$4"|"$5"|"$4-$5}}'

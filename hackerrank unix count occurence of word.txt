@@ -1,0 +1,2 @@
+cat >> file.txt
+grep -o -i Unix file.txt | wc -l
