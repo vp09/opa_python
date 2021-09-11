@@ -1,0 +1,64 @@
+'''
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+'''
+
+class Research:
+    def __init__(self,r_id,r_top,r_auth,r_cost,r_dept):
+        self.r_id=r_id
+        self.r_top=r_top
+        self.r_auth=r_auth
+        self.r_cost=r_cost
+        self.r_dept=r_dept
+class University:
+    def __init__(self,univ_name,rlist):
+        self.univ_name=univ_name
+        self.rlist=rlist
+    def get_maxResearchDepart(self,rlist):
+        d={}
+        for i in self.rlist:
+            if i.r_dept not in d:
+                d[i.r_dept]=1
+            else:
+                d[i.r_dept]+=1
+            
+        return (max(d, key =d.get))
+    def get_researchByTopic(self,topic):
+        r_obj=[]
+        for i in self.rlist:
+            if i.r_top==topic:
+                r_obj.append(i)
+        return r_obj
+        
+if __name__=="__main__":
+    count=int(input())
+    rlist=[]
+    
+    for i in range(count):
+        r_id=int(input())
+        r_top=input()
+        r_auth=input()
+        r_cost=int(input())
+        r_dept=input()
+        ob1=Research(r_id,r_top,r_auth,r_cost,r_dept)
+        rlist.append(ob1)
+        
+    topic=input()
+    
+    ob2=University("ABC",rlist)
+    
+    res1=ob2.get_maxResearchDepart(rlist)
+    print (res1)
+    
+    res2=ob2.get_researchByTopic(topic)
+    
+    if len(res2)==0:
+        print("No resources on the given Topic")
+        
+    else:
+        for i in res2:
+            print(i.r_id,i.r_cost,i.r_dept)

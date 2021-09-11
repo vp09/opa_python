@@ -1,0 +1,13 @@
+read first
+awk -F "|" '
+{ if($3 == ""){
+        total=0;}
+  else if (match($3,":")){
+        split($3,a,":")
+        total= 60*a[1]+a[2];}
+  else 
+    total=$3*60;
+    }
+    {
+        print($1,$2,total)
+        }'

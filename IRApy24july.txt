@@ -1,0 +1,55 @@
+class Book:
+    def __init__(self,bookId,bookName,subject,bookPrice):
+        self.bookId=bookId
+        self.bookName=bookName
+        self.subject=subject
+        self.bookPrice=bookPrice
+class Library:
+    def __init__(self,libraryName,bookList):
+        self.libraryName=libraryName
+        self.bookList=bookList
+    def findSubjectWiseBooks(self,bookList):
+        d={}
+        for i in self.bookList:
+            if i.subject not in d:
+                d[i.subject]=1
+            else:
+                d[i.subject]+=1
+        return d
+    def checkBookByCategory(self,bookId):
+        p_cat=""
+        for i in self.bookList:
+            if i.bookId==bookId:
+                bp=i.bookPrice
+                if bp>=1000:
+                    p_cat="High Price"
+                elif 750<=bp<1000:
+                    p_cat="Medium Price"
+                elif 500<=bp<750:
+                    p_cat="Average Price"
+                else:
+                    p_cat="Low Price"
+        return p_cat
+if __name__=="__main__":
+    count=int(input())
+    bookList=[]
+    
+    for i in range(count):
+        bookId=int(input())
+        bookName=input()
+        subject=input()
+        bookPrice=int(input())
+        ob1=Book(bookId,bookName,subject,bookPrice)
+        bookList.append(ob1)
+        
+    ob2=Library("ABC",bookList)
+    res1=ob2.findSubjectWiseBooks(bookList)
+    for key,value in res1.items():
+        print(key+" : "+str(value))
+     
+    bookId=int(input())   
+    res2=ob2.checkBookByCategory(bookId)
+    if len(res2)==0:
+        print("Book Not Found")
+    else:
+        print(res2)

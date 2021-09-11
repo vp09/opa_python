@@ -1,0 +1,69 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+class job:
+    def __init__(self,id,company,role,s_sal,high_sal):
+        self.id=id
+        self.company=company
+        self.role=role
+        self.s_sal=s_sal
+        self.high_sal=high_sal
+        
+class jobsportal:
+    def __init__(self,portal_name,job_list):
+        self.portal_name=portal_name
+        self.jl=job_list
+        
+    def get_bestjobbyrole(self,jrole):
+        ss=[]
+        out=[]
+        for i in self.jl:
+            if i.role.lower()==jrole.lower():
+                ss.append(i.s_sal)
+        if len(ss)!=0:
+            m=max(ss)
+            for i in self.jl:
+                if i.s_sal==m:
+                    out.append(i)
+        return out
+    
+    def jobswithsalary(self,sal):
+        dic={}
+        for i in self.jl:
+            if sal>=i.s_sal and sal<=i.high_sal:
+                dic[i.id]=i.company
+        return dic
+        
+            
+        
+        
+        
+if __name__=="__main__":
+    count=int(input())
+    jlist=[]
+    for i in range(count):
+        id=int(input())
+        company=input()
+        role=input()
+        s_sal=int(input())
+        high_sal=int(input())
+        ob=job(id,company,role,s_sal,high_sal)
+        jlist.append(ob)
+        
+    portal_name="ABC"
+    ob2=jobsportal(portal_name,jlist)
+    
+    job_role=input()
+    sal=int(input())
+    bj=ob2.get_bestjobbyrole(job_role)
+    if len(bj)==0:
+        print("Job Not Found for the given role")
+    else:
+        for i in bj:
+            print(i.id,i.company,i.s_sal)
+            
+    js=ob2.jobswithsalary(sal)
+    if len(js)==0:
+        print("No matching jobs for the given salary")
+    else:
+        for x,y in js.items():
+            print(x,y)    
+        
